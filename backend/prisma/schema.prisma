@@ -22,7 +22,8 @@ model Product {
   name        String
   description String?
   price       Decimal
-
+  stock       Int
+  
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }
