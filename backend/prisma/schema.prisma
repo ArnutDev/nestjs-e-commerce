@@ -14,6 +14,7 @@ model User {
   password  String
 
   cart      Cart?
+  orders    Order[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -70,4 +71,35 @@ model CartItem {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+model Order {
+  id          Int         @id @default(autoincrement())
+
+  userId      Int
+  user        User        @relation(fields: [userId], references: [id])
+
+  totalPrice  Decimal
+
+  items       OrderItem[]
+
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+}
+
+model OrderItem {
+  id               Int      @id @default(autoincrement())
+
+  orderId          Int
+  order            Order    @relation(fields: [orderId], references: [id])
+
+  productId        Int
+  productName      String
+
+  priceAtPurchase  Decimal
+
+  quantity         Int
+
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
 }

@@ -1,8 +1,4 @@
-import {
-  ForbiddenException,
-  Injectable,
-  NotFoundException,
-} from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateCartDto } from './dto/create-cart.dto';
 import { UpdateCartDto } from './dto/update-cart.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
@@ -10,7 +6,6 @@ import { PrismaService } from 'src/prisma/prisma.service';
 @Injectable()
 export class CartsService {
   constructor(private readonly prisma: PrismaService) {}
-
   async addItem(userId: number, productId: number, quantity: number) {
     //find cart
     let cart = await this.prisma.cart.findUnique({
