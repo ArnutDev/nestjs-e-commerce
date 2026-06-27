@@ -15,11 +15,17 @@ import { CreateCartDto } from './dto/create-cart.dto';
 import { UpdateCartDto } from './dto/update-cart.dto';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 import { AddItemDto } from './dto/add-item.dto';
+import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
 
+@ApiBearerAuth()
+@ApiTags('Carts')
 @Controller('carts')
 export class CartsController {
   constructor(private readonly cartsService: CartsService) {}
 
+  @ApiOperation({
+    summary: 'Add product to cart',
+  })
   @Post('add-item')
   @UseGuards(JwtAuthGuard)
   addItem(@Request() req, @Body() dto: AddItemDto) {
@@ -30,22 +36,18 @@ export class CartsController {
     );
   }
 
-  @Get()
-  findAll() {
-    return this.cartsService.findAll();
-  }
-
+  @ApiOperation({
+    summary: 'Get current user cart',
+  })
   @Get('me')
   @UseGuards(JwtAuthGuard)
   getMyCart(@Request() req) {
     return this.cartsService.getMyCart(req.user.userId);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateCartDto: UpdateCartDto) {
-    return this.cartsService.update(+id, updateCartDto);
-  }
-
+  @ApiOperation({
+    summary: 'Remove product from cart',
+  })
   @Delete('items/:id')
   @UseGuards(JwtAuthGuard)
   removeMyItem(@Request() req, @Param('id', ParseIntPipe) id: number) {

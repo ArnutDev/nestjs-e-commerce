@@ -53,14 +53,6 @@ export class CartsService {
     });
   }
 
-  create(createCartDto: CreateCartDto) {
-    return 'This action adds a new cart';
-  }
-
-  findAll() {
-    return `This action returns all carts`;
-  }
-
   async getMyCart(userId: number) {
     return this.prisma.cart.findUnique({
       where: {
@@ -74,10 +66,6 @@ export class CartsService {
         },
       },
     });
-  }
-
-  update(id: number, updateCartDto: UpdateCartDto) {
-    return `This action updates a #${id} cart`;
   }
 
   async removeMyItem(userId: number, itemId: number) {
