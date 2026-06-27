@@ -10,7 +10,7 @@ import { AuthService } from './auth.service';
 import { RegisterDto } from './dto/register.dto';
 import { LoginDto } from './dto/login.dto';
 import { JwtAuthGuard } from './guards/jwt-auth.guard';
-import { ApiOperation, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('Authentication')
 @Controller('auth')
@@ -33,6 +33,7 @@ export class AuthController {
     return this.authService.login(dto);
   }
 
+  @ApiBearerAuth()
   @ApiOperation({
     summary: 'get user profile',
   })
