@@ -81,34 +81,10 @@ git clone https://github.com/ArnutDev/nestjs-e-commerce.git
 cd nestjs-e-commerce/backend
 ```
 
-Install dependencies
-
-```bash
-npm install
-```
-
-Copy environment variables
+Copy & Setup environment variables 
 
 ```bash
 cp .env.example .env
-```
-
-Generate Prisma Client
-
-```bash
-npx prisma generate
-```
-
-Run database migrations
-
-```bash
-npx prisma migrate deploy
-```
-
-Start the application
-
-```bash
-npm run start:dev
 ```
 
 ## Running with Docker
